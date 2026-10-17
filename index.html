@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UZNY | 개인 이력서 수정본</title>
+  <title>UZNY | 개인 이력서</title>
 
   <!-- ===== 폰트 불러오기 =====
        Bagel Fat One, Inter : Google Fonts
@@ -15,7 +15,7 @@
 
   <style>
     /* =====================================================
-       0. 색상 변수 (피그마 색상 그대로)
+       0. 색상 변수
        ===================================================== */
     :root {
       --navy: #0D207F;        /* 포인트 색 (UZNY, 활성 메뉴, 진행된 수업) */
@@ -59,8 +59,7 @@
     }
 
     /* 메뉴를 눌렀을 때 도착하는 위치
-       → 큰 제목(About me / Experience / class)이 상단 메뉴 바로 아래에 오도록 함.
-       숫자를 줄이면 제목이 더 위로, 키우면 더 아래로 내려와요. */
+       → 큰 제목(About me / Experience / class)이 상단 메뉴 바로 아래에 오도록 함. */
     .anchor { scroll-margin-top: 90px; }
 
     /* =====================================================
@@ -164,7 +163,7 @@
     }
     .exp-table th { font-weight: 700; }
     /* '분류' 머리글을 칩 안의 글자(활동/근무/자격) 시작 위치에 맞춤
-       = 칸 여백 22px + 칩 안쪽 여백 12px. 더 띄우려면 12px 숫자를 키우세요. */
+       = 칸 여백 22px + 칩 안쪽 여백 12px. 더 띄우려면 12px 숫자를 키우기. */
     .exp-table th:first-child { padding-left: calc(22px + 12px); }
     .exp-table .exp__date { color: var(--mute); }
 
@@ -294,7 +293,7 @@
 
   <!-- =====================================================
        상단 메뉴
-       각 메뉴는 아래 큰 제목(id가 about / experience / class)으로 이동해요.
+       각 메뉴는 아래 큰 제목(id가 about / experience / class)으로 이동.
        ===================================================== -->
   <nav class="nav" aria-label="주 메뉴">
     <a class="nav__id" href="#top">imdbwlsdl</a>
@@ -345,7 +344,7 @@
             <th scope="col">역할</th>
           </tr>
         </thead>
-        <!-- 표 내용 : 한 줄 추가하려면 <tr> 한 묶음을 복사하세요 -->
+        <!-- 표 내용 : 한 줄 추가하려면 <tr> 한 묶음을 복사 -->
         <tbody>
           <tr>
             <td><span class="chip">활동</span></td>
@@ -390,7 +389,7 @@
       <!-- 이번 학기 수강과목 목록 -->
       <div class="courses">
         <h3 class="courses__title">2026학년도 2학기 수강과목</h3>
-        <!-- 진짜 목록: <ul>(목록) 안에 <li>(항목)로 과목을 하나씩 넣어요 -->
+        <!-- 진짜 목록: <ul>(목록) 안에 <li>(항목)로 과목을 하나씩 넣기 -->
         <ul class="courses__list">
           <li class="courses__item"><span class="courses__name">알고리즘</span><span class="chip">전공</span></li>
           <li class="courses__item"><span class="courses__name">이산수학</span><span class="chip">전공</span></li>
@@ -414,8 +413,8 @@
           [수업 진행됨]  <a class="week week--done" href="실습 링크"><span>LecXX</span></a>
           [링크 없는 수업(OT, 휴강)] <div class="week week--done"><span>LecXX</span><small>메모</small></div>
           [아직 안 함]   <div class="week"><span>LecXX</span><small>예정</small></div>
-          → 수업이 진행되면 아래 '예정' 칸을 위 형식의 <a> 로 바꾸고 href에 링크를 넣으세요.
-          → 지금 href="#weeks" 는 임시 링크입니다. 링크 주소를 알려주시면 제가 넣어드릴게요.
+          → 수업이 진행되면 아래 '예정' 칸을 위 형식의 <a> 로 바꾸고 href에 링크를 넣기.
+          → 지금 href="#weeks" 는 임시 링크.
         -->
         <div class="weeks__grid">
           <!-- Lec01 ~ Lec07 : 수업 진행됨 (진한 글씨, 링크) -->
@@ -445,7 +444,7 @@
        ===================================================== -->
   <footer class="footer">
     <a class="footer__github" href="https://github.com/imdbwlsdl" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <!-- 아래 날짜는 스크립트가 마지막 커밋 날짜로 자동 교체해요 (실패하면 이 날짜가 보임) -->
+    <!-- 아래 날짜는 스크립트가 마지막 커밋 날짜로 자동 교체 (실패하면 이 날짜가 보임) -->
     <p>최종 수정일 : <time id="last-modified">2026-10-18</time></p>
   </footer>
 
@@ -476,7 +475,7 @@
         el.textContent = ymd;
         el.setAttribute('datetime', ymd);
       })
-      .catch(() => { /* 실패하면 HTML에 적힌 기본 날짜를 그대로 보여줍니다 */ });
+      .catch(() => { /* 실패하면 HTML에 적힌 기본 날짜를 그대로 보여줌 */ });
   </script>
 </body>
 </html>
