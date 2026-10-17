@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>imdbwlsdl | 개인 이력서</title>
+  <title>UZNY | 개인 이력서 수정본</title>
 
   <!-- ===== 폰트 불러오기 =====
        Bagel Fat One, Inter : Google Fonts
@@ -15,7 +15,7 @@
 
   <style>
     /* =====================================================
-       0. 색상 변수
+       0. 색상 변수 (피그마 색상 그대로)
        ===================================================== */
     :root {
       --navy: #0D207F;        /* 포인트 색 (UZNY, 활성 메뉴, 진행된 수업) */
@@ -34,7 +34,7 @@
        ===================================================== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* 메뉴 클릭 시 부드럽게 스크롤 가능 (모션 줄이기 설정을 켠 사람은 제외) */
+    /* 메뉴 클릭 시 부드럽게 스크롤 (모션 줄이기 설정을 켠 사람은 제외) */
     @media (prefers-reduced-motion: no-preference) {
       html { scroll-behavior: smooth; }
     }
@@ -59,7 +59,8 @@
     }
 
     /* 메뉴를 눌렀을 때 도착하는 위치
-       → 큰 제목(About me / Experience / class)이 상단 메뉴 바로 아래에 오도록 함. */
+       → 큰 제목(About me / Experience / class)이 상단 메뉴 바로 아래에 오도록 함.
+       숫자를 줄이면 제목이 더 위로, 키우면 더 아래로 내려와요. */
     .anchor { scroll-margin-top: 90px; }
 
     /* =====================================================
@@ -145,7 +146,7 @@
     .about__intro { font-size: 18px; line-height: 1.4; color: var(--sub); }
 
     /* =====================================================
-       5. Experience (<table>)
+       5. Experience (진짜 <table>)
        ===================================================== */
     .exp-table {
       width: 100%;
@@ -162,6 +163,8 @@
       border-bottom: 0.5px solid var(--line);   /* 가는 가로선 */
     }
     .exp-table th { font-weight: 700; }
+    /* '분류' 머리글을 칩 안의 글자(활동/근무/자격) 시작 위치에 맞춤
+       = 칸 여백 22px + 칩 안쪽 여백 12px. 더 띄우려면 12px 숫자를 키우세요. */
     .exp-table th:first-child { padding-left: calc(22px + 12px); }
     .exp-table .exp__date { color: var(--mute); }
 
@@ -227,7 +230,8 @@
     /* 수업이 진행된 주차 = 진한 글씨 + 링크 (OT, 추석 휴강 같은 메모는 small 안에) */
     .week--done { color: var(--ink); }
     .week--done small { font-weight: 400; color: var(--ink); }
-    .week--done:hover span { text-decoration: underline; text-underline-offset: 4px; }
+    /* 링크(<a>)인 칸에만 마우스를 올리면 밑줄 → Lec01, Lec04는 <div>라서 해당 없음 */
+    a.week--done:hover span { text-decoration: underline; text-underline-offset: 4px; }
 
     /* =====================================================
        8. 푸터 (GitHub 링크 + 최종 수정일)
@@ -335,7 +339,7 @@
         <!-- 표 머리글 -->
         <thead>
           <tr>
-            <th scope="col">  분류</th>
+            <th scope="col">분류</th>
             <th scope="col">활동기간</th>
             <th scope="col">내용</th>
             <th scope="col">역할</th>
@@ -381,12 +385,12 @@
          Class : 수강과목 + 주차별 실습 현황
          ===================================================== -->
     <section class="section" data-nav="class">
-      <h2 class="label anchor" id="class">Class</h2>
+      <h2 class="label anchor" id="class">class</h2>
 
       <!-- 이번 학기 수강과목 목록 -->
       <div class="courses">
         <h3 class="courses__title">2026학년도 2학기 수강과목</h3>
-        <!-- 진짜 목록: <ul>(목록) 안에 <li>(항목)로 과목을 하나씩 넣음 -->
+        <!-- 진짜 목록: <ul>(목록) 안에 <li>(항목)로 과목을 하나씩 넣어요 -->
         <ul class="courses__list">
           <li class="courses__item"><span class="courses__name">알고리즘</span><span class="chip">전공</span></li>
           <li class="courses__item"><span class="courses__name">이산수학</span><span class="chip">전공</span></li>
@@ -408,20 +412,20 @@
 
         <!--
           [수업 진행됨]  <a class="week week--done" href="실습 링크"><span>LecXX</span></a>
-          [메모가 있을 때] <span>LecXX</span><small>OT</small> 처럼 small 을 추가
+          [링크 없는 수업(OT, 휴강)] <div class="week week--done"><span>LecXX</span><small>메모</small></div>
           [아직 안 함]   <div class="week"><span>LecXX</span><small>예정</small></div>
-          → 수업이 진행되면 아래 '예정' 칸을 위 형식의 <a> 로 바꾸고 href에 링크를 넣기
-          → 지금 href="#weeks" 는 임시 링크임.
+          → 수업이 진행되면 아래 '예정' 칸을 위 형식의 <a> 로 바꾸고 href에 링크를 넣으세요.
+          → 지금 href="#weeks" 는 임시 링크입니다. 링크 주소를 알려주시면 제가 넣어드릴게요.
         -->
         <div class="weeks__grid">
           <!-- Lec01 ~ Lec07 : 수업 진행됨 (진한 글씨, 링크) -->
-          <a class="week week--done" href="#weeks"><span>Lec01</span><small>OT</small></a>
-          <a class="week week--done" href="#weeks"><span>Lec02</span></a>
-          <a class="week week--done" href="#weeks"><span>Lec03</span></a>
-          <a class="week week--done" href="#weeks"><span>Lec04</span><small>추석 휴강</small></a>
-          <a class="week week--done" href="#weeks"><span>Lec05</span></a>
-          <a class="week week--done" href="#weeks"><span>Lec06</span></a>
-          <a class="week week--done" href="#weeks"><span>Lec07</span></a>
+          <div class="week week--done"><span>Lec01</span><small>OT</small></div>   <!-- OT : 링크 없음 -->
+          <a class="week week--done" href="file:///Users/yujin/Desktop/SMU/26%203-2/%EC%9B%B9%ED%94%84/git/web_uzny/doc01.html"><span>Lec02</span></a>
+          <a class="week week--done" href="file:///Users/yujin/Desktop/SMU/26%203-2/%EC%9B%B9%ED%94%84/git/web_uzny/doc02.html"><span>Lec03</span></a>
+          <div class="week week--done"><span>Lec04</span><small>추석 휴강</small></div>   <!-- 휴강 : 링크 없음 -->
+          <a class="week week--done" href="file:///Users/yujin/Desktop/SMU/26%203-2/%EC%9B%B9%ED%94%84/git/doc05.html"><span>Lec05</span></a>
+          <a class="week week--done" href="file:///Users/yujin/Desktop/SMU/26%203-2/%EC%9B%B9%ED%94%84/git/doc06.html"><span>Lec06</span></a>
+          <a class="week week--done" href="file:///Users/yujin/Desktop/SMU/26%203-2/%EC%9B%B9%ED%94%84/git/doc07.html"><span>Lec07</span></a>
           <!-- Lec08 ~ Lec15 : 예정 (연한 회색) -->
           <div class="week"><span>Lec08</span><small>예정</small></div>
           <div class="week"><span>Lec09</span><small>예정</small></div>
@@ -441,7 +445,7 @@
        ===================================================== -->
   <footer class="footer">
     <a class="footer__github" href="https://github.com/imdbwlsdl" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <!-- 아래 날짜는 스크립트가 마지막 커밋 날짜로 자동 교체 (실패하면 이 날짜가 보임) -->
+    <!-- 아래 날짜는 스크립트가 마지막 커밋 날짜로 자동 교체해요 (실패하면 이 날짜가 보임) -->
     <p>최종 수정일 : <time id="last-modified">2026-10-18</time></p>
   </footer>
 
@@ -458,8 +462,9 @@
     sections.forEach((s) => io.observe(s));
 
     // ===== 2) 최종 수정일 = 배포 저장소의 마지막 커밋 날짜 (GitHub API) =====
+    //   ▶ 저장소 주소: https://github.com/imdbwlsdl/web_uzny (OWNER / REPO)
     const OWNER = 'imdbwlsdl';
-    const REPO  = 'iweb_uzny';
+    const REPO  = 'web_uzny';
 
     fetch(`https://api.github.com/repos/${OWNER}/${REPO}/commits?per_page=1`)
       .then((res) => { if (!res.ok) throw new Error(res.status); return res.json(); })
