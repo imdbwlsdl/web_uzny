@@ -1,0 +1,324 @@
+/* =====================================================
+   0. 색상 변수
+   ===================================================== */
+:root {
+  --navy: #0D207F;        /* 메인 컬러 (로고, 활성 메뉴, 실습 진행, 푸터 배경) */
+  --ink: #343642;         /* 기본 글자색 */
+  --sub: #545454;         /* 보조 글자색 (실습 없음 포함) */
+  --mute: #A5A5A5;        /* 흐린 글자색 (날짜) */
+  --label: #CACACA;       /* 큰 영역 제목 색 */
+  --line: #A1A1A1;        /* 표/목록 구분선 */
+  --chip-bg: #F3F4F6;     /* 칩 배경 */
+  --chip-text: #607592;   /* 칩 글자색 */
+  --soon: #C8CBD2;        /* 예정 */
+  --max: 1000px;          /* 본문 최대 너비 */
+}
+
+/* =====================================================
+   1. 기본 설정
+   ===================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+/* 화면에는 안 보이고 스크린리더만 읽는 텍스트 */
+.sr-only {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* =====================================================
+   2. 상단 메뉴 (스크롤해도 위에 고정)
+   ===================================================== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #fff;
+}
+.nav__id { padding: 10px; font-size: 18px; color: var(--sub); }
+.nav__links { display: flex; gap: 16px; }
+.nav__links a {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--sub);
+  border-bottom: 1.5px solid transparent;
+}
+/* 현재 보고 있는 영역의 메뉴 (파란 밑줄) */
+.nav__links a.is-active { color: var(--navy); border-bottom-color: var(--navy); }
+
+/* =====================================================
+   3. 공통 요소
+   ===================================================== */
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+/* 영역 위쪽 여백. 메뉴로 이동하면 이 여백 덕분에 제목이 상단 메뉴 바로 아래에 옴 */
+.section { padding-top: 100px; }
+
+/* 큰 회색 영역 제목 (About me / Experience / Class) */
+.label { font-size: 80px; font-weight: 700; line-height: 1.2; color: var(--label); }
+.label.is-right { text-align: right; }
+
+/* 제목 아래 안내 문구 */
+.section-desc { margin-top: 20px; font-size: 16px; line-height: 1.6; color: var(--sub); }
+.section-desc.is-right { text-align: right; }
+
+/* 회색 둥근 칩 (활동, 자격, 전공) */
+.chip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  padding: 6px 12px;
+  background: var(--chip-bg);
+  border-radius: 8px;
+  font-family: Inter, Pretendard, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--chip-text);
+  white-space: nowrap;
+}
+
+/* =====================================================
+   4. header : 활동명 + About me + 소속 + 한 줄 소개
+   (1280px 창에서 스크롤 없이 첫 화면에 다 보이도록 로고 크기를 정함)
+   ===================================================== */
+/* header 높이 = 창 높이 - 209px
+   → 어떤 창 높이에서도 첫 화면 맨 아래에 Experience 제목이 반쯤 잘려서 보임
+   (209 = 상단 메뉴 89 + 영역 위쪽 여백 100 + 제목 절반 48 - 보정 28. 더 많이 보이게 하려면 숫자를 키우기)
+   margin-bottom 의 -28px : 로고와 About me 사이를 넓힌 만큼 Experience 를 위로 당겨서 걸쳐 보이는 정도를 유지 */
+.hero { padding-top: 0; min-height: calc(100vh - 209px); margin-bottom: -28px; }
+.logo {
+  font-family: "Bagel Fat One", Pretendard, sans-serif;
+  font-weight: 400;
+  font-size: 360px;
+  line-height: 1;
+  color: var(--navy);
+  margin-left: -6px;
+}
+.hero .label { margin-top: 40px; }   /* 로고와 About me 사이 간격 */
+.hero__text { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.hero__school { font-size: 16px; font-weight: 500; color: var(--ink); }
+.hero__intro { font-size: 18px; line-height: 1.5; color: var(--sub); }
+
+/* =====================================================
+   5. Experience : 표
+   ===================================================== */
+.exp-table {
+  width: 100%;
+  margin-top: 40px;
+  border-collapse: collapse;   /* 칸 사이 선이 겹쳐서 한 줄로 보이게 */
+  table-layout: fixed;
+  font-size: 16px;
+}
+/* 칸 너비 (분류 / 활동기간 / 내용은 나머지 / 역할) */
+.col-type { width: 100px; }
+.col-date { width: 200px; }
+.col-role { width: 120px; }
+
+.exp-table th,
+.exp-table td {
+  padding: 22px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 0.5px solid var(--line);
+}
+.exp-table th { font-weight: 700; }
+/* '분류' 머리글을 칩 안의 글자 위치에 맞춤 (칸 여백 22px + 칩 여백 12px) */
+.exp-table th:first-child { padding-left: 34px; }
+.exp-table .exp__date { color: var(--mute); }
+.exp-table tbody tr:hover { background: #FAFAFB; }
+
+/* =====================================================
+   6. Class : 제목 옆 안내 문구 + 수강과목 목록
+   ===================================================== */
+.class-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px 48px;
+}
+.class-desc {
+  width: 100%;
+  max-width: 694px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--sub);
+}
+
+.courses { width: 100%; max-width: 694px; margin: 24px 0 0 auto; }
+.courses__list { list-style: none; }
+.courses__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 4px;
+  border-bottom: 0.5px solid var(--line);
+}
+.courses__name { padding: 10px; }
+/* 웹프로그래밍 과목만 파란색 + 줄 전체가 링크 */
+.courses__item.is-now { color: var(--navy); font-weight: 500; }
+.courses__link { display: flex; flex: 1; justify-content: space-between; align-items: center; }
+.courses__item.is-now:hover .courses__name { text-decoration: underline; }
+
+/* =====================================================
+   7. 웹프로그래밍 주차별 실습 현황 (Lec01 ~ Lec15)
+   ===================================================== */
+.weeks__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  padding: 22px 14px;
+  border-bottom: 0.5px solid var(--line);
+}
+.weeks__title { font-size: 18px; font-weight: 700; }
+
+/* 범례 (제목 오른쪽) : 점과 글자 색이 실제 칸의 색과 같음 */
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; }
+.legend__item { display: flex; align-items: center; gap: 6px; }
+.legend__item::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.legend-done { color: var(--navy); }
+.legend-none { color: var(--sub); }
+.legend-soon { color: var(--soon); }
+
+/* 5칸 격자 (칸 너비 100px, 양끝 정렬) */
+.weeks__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 100px));
+  justify-content: space-between;
+  gap: 60px 0;
+  margin-top: 60px;
+}
+.week {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 76px;
+  padding: 10px 0;
+  text-align: center;
+}
+.week__name { font-size: 22px; font-weight: 700; }
+.week__note { margin-top: 6px; font-size: 14px; font-weight: 400; }
+
+/* 실습 진행 : 파란색 + 링크 */
+.week-done { padding: 0; color: var(--navy); }
+.week-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 76px;
+  padding: 10px 0;
+}
+.week-link:hover .week__name { text-decoration: underline; }
+/* 실습 없음 (OT, 휴강) : 진한 회색, 링크 없음 */
+.week-none { color: var(--sub); }
+/* 예정 : 연한 회색, 링크 없음 */
+.week-soon { color: var(--soon); }
+.week-soon .week__note { font-weight: 300; }
+
+/* =====================================================
+   8. footer : 메인 컬러 배경 + 흰 글씨 (GitHub 링크, 최종 수정일)
+   ===================================================== */
+.footer { margin-top: 160px; background: var(--navy); color: #fff; }
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 20px 40px;
+  text-align: center;
+  font-size: 14px;
+}
+.footer__github { font-weight: 500; text-decoration: underline; }
+.footer__github:hover { opacity: 0.8; }
+
+/* =====================================================
+   9. 반응형
+   ===================================================== */
+/* 창 너비가 1286px 이하로 줄면 로고도 너비에 맞춰 같이 줄어듦 (28vw = 360px 일 때 연결됨) */
+@media (max-width: 1286px) {
+  .logo { font-size: 28vw; }
+}
+
+@media (max-width: 900px) {
+  .hero { min-height: 0; margin-bottom: 0; }
+  .label { font-size: 56px; }
+  .class-head { flex-direction: column; align-items: flex-start; }
+  .class-desc { max-width: 100%; }
+}
+
+@media (max-width: 720px) {
+  .nav { padding: 12px 16px; }
+  .nav__id { display: none; }
+  .nav__links { margin: 0 auto; gap: 4px; }
+  .nav__links a { font-size: 16px; padding: 8px; }
+  .section { padding-top: 80px; }
+  .logo { font-size: 26vw; }
+  .hero .label { margin-top: 20px; }
+  .label { font-size: 44px; }
+
+  /* 표를 카드형 2줄로 보여줌 (표 구조는 그대로 유지) */
+  .exp-table thead {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .exp-table,
+  .exp-table tbody { display: block; }
+  .exp-table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "date type" "content role";
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--line);
+  }
+  .exp-table td { display: block; padding: 4px 8px; border-bottom: 0; }
+  .exp-table td:nth-child(1) { grid-area: type; justify-self: end; }
+  .exp-table td:nth-child(2) { grid-area: date; }
+  .exp-table td:nth-child(3) { grid-area: content; }
+  .exp-table td:nth-child(4) { grid-area: role; text-align: right; }
+
+  .weeks__grid { gap: 24px 0; }
+  .week__name { font-size: 16px; }
+  .week__note { font-size: 12px; }
+  .footer { margin-top: 100px; }
+}
+
+/* =====================================================
+   10. 창 높이가 낮을 때 (너비 1000px 이상)
+   로고를 조금씩 줄여서 소속과 한 줄 소개가 스크롤 없이 첫 화면에 보이게 함
+   ===================================================== */
+@media (min-width: 1000px) and (max-height: 690px) {
+  .logo { font-size: 320px; }
+}
+@media (min-width: 1000px) and (max-height: 640px) {
+  .logo { font-size: 270px; }
+}
+@media (min-width: 1000px) and (max-height: 590px) {
+  .logo { font-size: 220px; }
+}
