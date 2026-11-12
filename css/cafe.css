@@ -233,6 +233,11 @@ button {
   padding-top: 24px;
 }
 
+/* 마지막 카테고리도 탭 바로 아래까지 올라올 수 있도록 최소 높이 확보 */
+.menu-group:last-child {
+  min-height: calc(100vh - var(--topbar-h) - 160px);
+}
+
 .menu-group__title {
   margin-bottom: 8px;
   font-family: var(--font-title);
